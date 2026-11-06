@@ -9,3 +9,85 @@
 @media(max-width:680px){.brand-logo{width:155px;max-height:46px}}
 
 .gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin:42px auto 0;max-width:1200px}.gallery-card{margin:0;overflow:hidden;border:1px solid #dce6f0;border-radius:15px;background:#fff;box-shadow:0 12px 32px #0b2a4b12}.gallery-card a{display:block;background:#111827;overflow:hidden}.gallery-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;transition:transform .25s}.gallery-card a:hover img{transform:scale(1.025)}.gallery-card figcaption{display:flex;flex-direction:column;gap:5px;padding:16px 18px}.gallery-card figcaption b{font:800 16px Manrope,sans-serif;color:var(--navy)}.gallery-card figcaption span{font-size:13px;color:var(--muted)}@media(max-width:680px){.gallery-grid{grid-template-columns:1fr;gap:18px}}
+
+/* CONTACT - DESIGN PROFESIONAL LA GHITA */
+
+.contact {
+  padding: 70px 24px;
+  background: #f4f7fc;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 35px auto;
+}
+
+.contact-card {
+  background: #ffffff;
+  border: 1px solid #dce6f0;
+  border-radius: 16px;
+  padding: 30px 22px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 30, 70, 0.08);
+  transition: transform .25s, box-shadow .25s;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 30, 70, 0.14);
+}
+
+.contact-card h3 {
+  color: #123d69;
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+
+.contact-card p {
+  color: #34445a;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.contact-card .btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.contact-hours {
+  max-width: 700px;
+  margin: 35px auto 0;
+  padding: 28px;
+  background: #ffffff;
+  border-left: 5px solid #e0002b;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 30, 70, 0.08);
+}
+
+.contact-hours h3 {
+  color: #123d69;
+  margin-bottom: 18px;
+}
+
+.contact-hours p {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #e8edf3;
+  padding: 10px 0;
+  color: #34445a;
+}
+
+@media (max-width: 750px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-hours p {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
