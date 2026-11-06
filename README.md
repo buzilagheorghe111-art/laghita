@@ -11,3 +11,4 @@ Site static HTML/CSS/JavaScript, pregătit pentru GitHub Pages.
 6. Așteaptă publicarea. Adresa va fi `https://buzilagheorghe111-art.github.io/service-auto-la-ghita-site/`.
 
 Linkurile de descărcare trimit către depozitul GitHub Releases existent pentru instalatoare.
+\n## Fișiere media\n- `assets/logo-la-ghita.jpg` – logo-ul oficial extras din aplicație.\n- `manual-utilizare-service-auto-la-ghita-v1.9.153.pdf` – manual PDF inclus.\n
