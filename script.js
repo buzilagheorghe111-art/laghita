@@ -18,7 +18,7 @@ if (toggle && nav) {
 
 document.addEventListener('DOMContentLoaded', function () {
   emailjs.init({
-   publicKey: 'vZstiHBJ7uKaHHRNL'
+   publicKey: 'vZstjHBI7uKaHHRNL'
   });
 
   const form = document.getElementById('booking-form');
