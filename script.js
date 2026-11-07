@@ -63,13 +63,22 @@ document.addEventListener('DOMContentLoaded', function () {
       const emailResponse = await fetch(form.action, {
         method: 'POST',
         body: formData,
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Accept': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
       });
       const emailText = await emailResponse.text();
+      let emailResult = null;
+      try {
+        emailResult = emailText ? JSON.parse(emailText) : null;
+      } catch (_) {
+        emailResult = null;
+      }
 
-      if (!emailResponse.ok) {
-        console.error('Static Forms error:', emailResponse.status, emailText);
-        throw new Error('Static Forms status: ' + emailResponse.status);
+      if (!emailResponse.ok || (emailResult && emailResult.success === false)) {
+        console.error('Static Forms error:', emailResponse.status, emailResult || emailText);
+        throw new Error('Static Forms submission failed: ' + emailResponse.status);
       }
       emailSent = true;
 
