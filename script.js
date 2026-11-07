@@ -56,40 +56,46 @@ document.addEventListener('DOMContentLoaded', function () {
       status: 'new'
     };
 
+    let emailSent = false;
+
     try {
-      // Keep the existing Static Forms email delivery and also save the booking in Supabase.
-      const [emailResponse, databaseResponse] = await Promise.all([
-        fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        }),
-        fetch(SUPABASE_URL + '/rest/v1/bookings', {
-          method: 'POST',
-          headers: {
-            'apikey': SUPABASE_PUBLISHABLE_KEY,
-            'Authorization': 'Bearer ' + SUPABASE_PUBLISHABLE_KEY,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(booking)
-        })
-      ]);
+      // 1) Trimite mai întâi e-mailul prin Static Forms.
+      const emailResponse = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      const emailText = await emailResponse.text();
 
-      const [emailText, databaseText] = await Promise.all([
-        emailResponse.text(),
-        databaseResponse.text()
-      ]);
+      if (!emailResponse.ok) {
+        console.error('Static Forms error:', emailResponse.status, emailText);
+        throw new Error('Static Forms status: ' + emailResponse.status);
+      }
+      emailSent = true;
 
-      if (!emailResponse.ok || !databaseResponse.ok) {
-        console.error('Booking delivery details:', {
-          emailStatus: emailResponse.status,
-          emailResponse: emailText,
-          databaseStatus: databaseResponse.status,
-          databaseResponse: databaseText
-        });
-        throw new Error('Email status: ' + emailResponse.status +
-          '; database status: ' + databaseResponse.status);
+      // 2) Salvează programarea în Supabase.
+      // Pentru cheia publishable se trimite apikey; nu o folosim ca JWT Bearer.
+      const databaseResponse = await fetch(SUPABASE_URL + '/rest/v1/bookings', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_PUBLISHABLE_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(booking)
+      });
+      const databaseText = await databaseResponse.text();
+
+      if (!databaseResponse.ok) {
+        console.error('Supabase error:', databaseResponse.status, databaseText);
+        form.reset();
+        if (status) {
+          status.textContent = 'E-mailul a fost trimis cu succes, dar programarea nu a putut fi salvată în panoul de administrare. Te rugăm să ne contactezi telefonic la 0741 826 476. Nu retrimite formularul.';
+          status.dataset.state = 'warning';
+        } else {
+          alert('E-mailul a fost trimis, dar salvarea în panoul de administrare a eșuat. Te rugăm să ne suni la 0741 826 476. Nu retrimite formularul.');
+        }
+        return;
       }
 
       form.reset();
@@ -101,12 +107,21 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     } catch (error) {
       console.error('Eroare la trimiterea programării:', error);
-      if (status) {
-        status.textContent = 'Solicitarea nu a putut fi confirmată în toate sistemele. Te rugăm să ne suni la 0741 826 476 înainte de a retrimite.';
+      if (emailSent) {
+        form.reset();
+        if (status) {
+          status.textContent = 'E-mailul a fost trimis, dar a apărut o problemă la salvarea programării. Te rugăm să ne contactezi la 0741 826 476. Nu retrimite formularul.';
+          status.dataset.state = 'warning';
+        } else {
+          alert('E-mailul a fost trimis, dar salvarea programării a eșuat. Te rugăm să ne suni la 0741 826 476. Nu retrimite formularul.');
+        }
+      } else if (status) {
+        status.textContent = 'E-mailul nu a putut fi trimis. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.';
         status.dataset.state = 'error';
       } else {
-        alert('Solicitarea nu a putut fi confirmată în toate sistemele. Te rugăm să ne suni la 0741 826 476.');
+        alert('E-mailul nu a putut fi trimis. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.');
       }
+    }
     } finally {
       button.disabled = false;
       button.textContent = originalButtonText;
