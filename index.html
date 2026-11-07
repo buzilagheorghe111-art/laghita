@@ -50,7 +50,6 @@
   <title>Service Auto La Ghiță – Reparații și Diagnoză Auto | Șaru Dornei</title>
   <link rel="stylesheet" href="style.css">
   <meta name="google-site-verification" content="-CJBc5iOmZ2f6h34P8tMCaKqEFZzWi7xRUZWrVg4diY" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -177,7 +176,12 @@
     <p>Completează formularul și trimite solicitarea direct pe e-mail. Vei primi confirmarea după trimitere.</p>
   </div>
 
-<form id="booking-form" class="contact-card">
+<form id="booking-form" class="contact-card" action="https://api.staticforms.dev/submit" method="POST">
+    <input type="hidden" name="apiKey" value="sf_edbee66930e5fb84ef675a52">
+    <input type="hidden" name="subject" value="Solicitare nouă de programare – Service Auto La Ghiță">
+    <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+      <label>Nu completa acest câmp<input type="text" name="honeypot" tabindex="-1" autocomplete="off"></label>
+    </div>
     <label>Nume și prenume
       <input type="text" name="nume" required>
     </label>
@@ -218,8 +222,9 @@
     </label>
 
     <button type="submit" class="btn btn-primary">
-      Trimite solicitarea pe e-mail
+      Trimite solicitarea
     </button>
+    <p id="booking-status" role="status" aria-live="polite"></p>
   </form>
 </section>
 
