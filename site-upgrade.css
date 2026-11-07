@@ -15,3 +15,13 @@
 .contact-detail-link{color:var(--blue);font-weight:800;font-size:20px;text-decoration:none;letter-spacing:.2px}
 .contact-detail-link:hover{text-decoration:underline}
 .contact-detail-link:focus-visible{outline:3px solid #1681dc;outline-offset:4px;border-radius:4px}
+
+/* Continut local pentru cautari in zona service-ului */
+.local-seo{background:#fff}
+.local-seo-content{max-width:900px;margin:28px auto 0;padding:28px 30px;background:#f4f8fc;border:1px solid #dce6f0;border-radius:16px}
+.local-seo-content p{color:var(--muted);font-size:15px;line-height:1.8;margin:0 0 14px}
+.local-seo-content p:last-of-type{margin-bottom:0}
+.local-seo-actions{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:24px}
+.local-seo-actions .btn{min-height:46px}
+.local-seo-actions .text-link{font-weight:700}
+@media(max-width:600px){.local-seo-content{padding:22px 18px}.local-seo-actions{align-items:stretch;flex-direction:column}.local-seo-actions .btn{text-align:center;justify-content:center}}
