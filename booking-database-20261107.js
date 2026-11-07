@@ -54,7 +54,24 @@
 
       if (!response.ok) {
         const detail = await response.text();
-        throw new Error('Supabase HTTP ' + response.status + ': ' + detail);
+        // Backward compatibility until the preferred_time migration is run.
+        if (booking.preferred_time && (detail.includes('preferred_time') || detail.includes('PGRST204'))) {
+          const legacyBooking = { ...booking };
+          delete legacyBooking.preferred_time;
+          const retry = await fetch(SUPABASE_URL + '/rest/v1/bookings', {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_PUBLISHABLE_KEY,
+              'Authorization': 'Bearer ' + SUPABASE_PUBLISHABLE_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(legacyBooking)
+          });
+          if (!retry.ok) throw new Error('Supabase HTTP ' + retry.status + ': ' + await retry.text());
+        } else {
+          throw new Error('Supabase HTTP ' + response.status + ': ' + detail);
+        }
       }
       console.info('Programarea a fost salvată în Supabase.');
       if (status) {
