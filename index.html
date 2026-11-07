@@ -192,7 +192,7 @@
   <div class="section-heading">
     <span class="eyebrow">PROGRAMARE ONLINE</span>
     <h2>Solicită o programare</h2>
-    <p>Completează formularul și trimite solicitarea direct pe e-mail. Vei primi confirmarea după trimitere.</p>
+    <p>Completează formularul pentru a solicita o programare. Solicitarea va fi trimisă către service; programarea este confirmată numai după ce te contactăm telefonic.</p>
   </div>
 
 <form id="booking-form" class="contact-card" action="https://api.staticforms.dev/submit" method="POST">
@@ -237,11 +237,14 @@
     </label>
 
     <label>Ora preferată
-      <input type="time" name="ora" min="09:00" max="17:00" required>
+      <input type="time" name="ora" min="09:00" max="17:00" required aria-describedby="booking-hours-help">
     </label>
 
     <label>Descrierea problemei
-      <textarea name="descriere" rows="4"></textarea>
+      <textarea name="descriere" rows="4" maxlength="1000"></textarea>
+    </label>
+    <p id="booking-hours-help" class="form-help">Program: luni–vineri 09:00–17:00, sâmbătă 09:00–13:00. Duminica nu se fac programări. Trimiterea formularului reprezintă o solicitare, nu o confirmare.</p>
+    <label class="consent-label"><input type="checkbox" name="privacy_consent" required> Sunt de acord ca datele introduse să fie folosite pentru a fi contactat(ă) în legătură cu această programare.</label>
     </label>
 
     <button type="submit" class="btn btn-primary">
