@@ -59,8 +59,8 @@
   </a>
   <button class="menu-toggle" aria-label="Deschide meniul" aria-expanded="false">☰</button>
   <nav class="nav">
-    <a href="#acasa">Acasă</a><a href="#program">Programul</a><a href="#functii">Funcționalități</a><a href="#servicii">Servicii</a><a href="#galerie">Galerie</a><a href="#estimare">Estimare</a>
-    <a href="#descarcare">Descărcare</a><a href="#manual">Manual</a><a href="#contact">Contact</a>
+    <a href="#acasa">Acasă</a><a href="#program">Programul</a><a href="#functii">Funcționalități</a><a href="#servicii">Servicii</a><a href="#galerie">Galerie</a><a href="#estimare">Estimare</a><a href="#urmarire">Reparație</a><a href="#recenzii">Recenzii</a>
+    <a href="#descarcare">Descărcare</a><a href="#manual">Manual</a><a href="#mementouri">Mementouri</a><a href="#contact">Contact</a>
   </nav>
 </header>
 
@@ -119,7 +119,21 @@
 
 <section class="section estimate" id="estimare"><div class="section-heading center"><span class="eyebrow">CALCUL ORIENTATIV</span><h2>Solicită o estimare de preț</h2><p>Alege lucrarea și contactează-ne pentru confirmarea costului.</p></div><div class="estimate-box"><label for="estimate-service">Serviciul dorit</label><select id="estimate-service"><option value="">Alege o lucrare</option><option value="100-150">Diagnoză computerizată</option><option value="100-180">Schimb ulei și filtre – manoperă</option><option value="150-250">Revizie generală</option><option value="120-200">Plăcuțe frână – o punte</option><option value="200-350">Discuri și plăcuțe – o punte</option><option value="500-900">Kit distribuție</option><option value="600-1000">Înlocuire ambreiaj</option></select><p id="estimate-result" aria-live="polite">Alege un serviciu pentru a vedea intervalul orientativ.</p><a class="btn btn-primary" href="https://wa.me/40741826476?text=Bun%C4%83%20ziua!%20Doresc%20o%20estimare%20de%20pre%C8%9B." target="_blank" rel="noopener">Cere estimarea pe WhatsApp</a></div></section>
 
-<section class="download-band" id="descarcare">
+
+<section class="section tracking-section" id="urmarire">
+ <div class="section-heading center"><span class="eyebrow">INFORMAȚII DESPRE LUCRARE</span><h2>Verifică starea reparației</h2><p>Introdu codul de urmărire primit de la service. Pentru confidențialitate, afișăm doar starea lucrării și ultima actualizare.</p></div>
+ <form id="repair-lookup-form" class="site-form compact-form"><label>Cod de urmărire<input name="code" required minlength="5" maxlength="40" autocomplete="off" placeholder="Ex.: LGH-ABC123"></label><button class="btn btn-primary" type="submit">Verifică</button><p id="repair-lookup-result" class="form-result" role="status" aria-live="polite"></p></form>
+</section>
+<section class="section reviews-section" id="recenzii">
+ <div class="section-heading center"><span class="eyebrow">PĂREREA CLIENȚILOR</span><h2>Recenzii</h2><p>Recenziile trimise sunt verificate înainte de afișarea publică.</p></div>
+ <div id="reviews-list" class="reviews-grid"><p class="muted">Se încarcă recenziile...</p></div>
+ <form id="review-form" class="site-form"><h3>Lasă o recenzie</h3><label>Numele tău<input name="name" required minlength="2" maxlength="80"></label><label>Nota<select name="rating" required><option value="">Alege nota</option><option value="5">★★★★★ – Excelent</option><option value="4">★★★★ – Foarte bine</option><option value="3">★★★ – Bine</option><option value="2">★★ – Acceptabil</option><option value="1">★ – Nemulțumit</option></select></label><label>Mesajul tău<textarea name="review" rows="4" required minlength="10" maxlength="1200"></textarea></label><button class="btn btn-primary" type="submit">Trimite recenzia</button><p id="review-result" class="form-result" role="status" aria-live="polite"></p></form>
+</section>
+<section class="section reminders-section" id="mementouri">
+ <div class="section-heading center"><span class="eyebrow">NU UITA DE MAȘINA TA</span><h2>Memento ITP și revizie</h2><p>Lasă datele de contact și data scadentă. Vom putea folosi solicitarea pentru a-ți reaminti de verificarea sau revizia mașinii.</p></div>
+ <form id="reminder-form" class="site-form"><label>Nume și prenume<input name="name" required minlength="2" maxlength="100"></label><label>Telefon<input name="phone" type="tel" required minlength="6" maxlength="30"></label><label>E-mail (opțional)<input name="email" type="email"></label><label>Mașina (marcă și model)<input name="vehicle" required minlength="2" maxlength="100"></label><label>Ce dorești să urmărești?<select name="type" required><option value="">Alege</option><option value="ITP">ITP</option><option value="Revizie">Revizie</option><option value="Ambele">ITP și revizie</option></select></label><label>Data scadentă<input name="due_date" type="date" required></label><label class="consent-label"><input type="checkbox" name="consent" required> Sunt de acord să fiu contactat(ă) pentru acest memento.</label><button class="btn btn-primary" type="submit">Solicită memento</button><p id="reminder-result" class="form-result" role="status" aria-live="polite"></p></form>
+</section>
+\n<section class="download-band" id="descarcare">
   <div><span class="eyebrow">VERSIUNEA DISPONIBILĂ</span><h2>Descarcă Service Auto<br>„La Ghiță”</h2><p>Găsești aici versiunile publicate oficial și fișierele necesare instalării.</p><small>Versiunea afișată în pagina GitHub Releases este cea mai recentă publicată.</small></div>
   <div class="download-actions">
     <a class="btn btn-light" href="https://github.com/buzilagheorghe111-art/service-auto-la-ghita-releases/releases/latest" target="_blank" rel="noopener">Descarcă ultima versiune ↗</a>
@@ -240,7 +254,7 @@
 </main>
 <footer><a class="brand footer-brand" href="#acasa"><img class="brand-logo" src="assets/logo-la-ghita.jpg" alt="Service Auto La Ghiță"><span class="sr-only">Service Auto La Ghiță</span></a><p>© <span id="year"></span> Service Auto „La Ghiță”. Toate drepturile rezervate.</p><a href="#acasa">Înapoi sus ↑</a></footer>
 <script src="site-navigation-20261107.js"></script>
-<script src="site-upgrade-20261107.js"></script>
+<script src="site-upgrade-20261107.js"></script>\n<script src="site-supabase-features-20261107.js"></script>
 <script src="booking-database-20261107.js"></script>
   <a href="https://wa.me/40741826476?text=Bună!%20Doresc%20informații%20despre%20serviciile%20Service%20Auto%20La%20Ghiță."
    target="_blank"
