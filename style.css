@@ -91,3 +91,43 @@
     gap: 4px;
   }
 }
+
+
+/* Booking form layout restoration */
+#booking-form.contact-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 22px;
+  text-align: left;
+  max-width: 1000px;
+  margin: 28px auto 0;
+  padding: 30px;
+}
+#booking-form.contact-card > label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #123d69;
+  font-weight: 700;
+  font-size: 14px;
+}
+#booking-form.contact-card input,
+#booking-form.contact-card select,
+#booking-form.contact-card textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 13px;
+  border: 1px solid #cbd7e4;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b42;
+  font: inherit;
+}
+#booking-form.contact-card textarea { resize: vertical; min-height: 105px; }
+#booking-form.contact-card > button { justify-self: start; margin-top: 4px; }
+#booking-form #booking-status { grid-column: 1 / -1; margin: 0; }
+@media (max-width: 680px) {
+  #booking-form.contact-card { grid-template-columns: 1fr; padding: 22px 18px; }
+  #booking-form.contact-card > button { width: 100%; }
+}
