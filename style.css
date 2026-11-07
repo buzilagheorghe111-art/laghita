@@ -131,3 +131,58 @@
   #booking-form.contact-card { grid-template-columns: 1fr; padding: 22px 18px; }
   #booking-form.contact-card > button { width: 100%; }
 }
+
+/* Optimizare mobil: formulare, navigare si elemente tactile */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 78px; }
+body { overflow-x: hidden; }
+img, video, iframe { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+a, button { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #1681dc; outline-offset: 3px; }
+
+@media (max-width: 680px) {
+  .site-header { padding-left: 18px; padding-right: 18px; }
+  .hero { min-width: 0; gap: 12px; }
+  .hero h1 { font-size: clamp(34px, 9vw, 46px); letter-spacing: -1.2px; }
+  .hero p { font-size: 15px; line-height: 1.65; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; min-height: 48px; }
+  .hero-art { max-width: 100%; overflow: hidden; }
+  .trust-strip { gap: 15px 12px; }
+  .trust-strip div { align-items: flex-start; font-size: 12px; line-height: 1.4; }
+  .section { padding-left: 18px; padding-right: 18px; }
+  .section-heading h2, .manual h2, .download-band h2 { overflow-wrap: anywhere; }
+  .contact-grid { gap: 14px; }
+  .contact-card { min-width: 0; padding: 24px 18px; }
+  #booking-form.contact-card,
+  .site-form,
+  .estimate-box { width: 100%; max-width: 100%; }
+  #booking-form.contact-card { padding: 22px 16px; gap: 15px; }
+  #booking-form.contact-card input,
+  #booking-form.contact-card select,
+  #booking-form.contact-card textarea,
+  .site-form input:not([type=checkbox]),
+  .site-form select,
+  .site-form textarea,
+  .estimate-box select {
+    min-height: 46px;
+    font-size: 16px;
+    color: #172b42;
+  }
+  #booking-form.contact-card textarea,
+  .site-form textarea { min-height: 110px; }
+  #booking-form.contact-card .consent-label,
+  .site-form .consent-label { line-height: 1.5; }
+  #booking-form.contact-card > button,
+  .site-form button,
+  .compact-form button { width: 100%; min-height: 48px; }
+  .form-help { grid-column: 1 / -1; line-height: 1.55; }
+  .contact-hours { padding: 20px 18px; }
+  .gallery-grid { gap: 14px; }
+  .gallery-card figcaption { padding: 14px; }
+  .download-band { padding-left: 18px; padding-right: 18px; }
+  footer { gap: 14px; }
+  footer > a:last-child { min-height: 42px; display: inline-flex; align-items: center; }
+}
+
