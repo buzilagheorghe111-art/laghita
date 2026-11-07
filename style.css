@@ -185,3 +185,19 @@ a, button { -webkit-tap-highlight-color: transparent; }
   footer > a:last-child { min-height: 42px; display: inline-flex; align-items: center; }
 }
 
+
+/* Navigare mobil: zona de atingere, derulare si accesibilitate */
+.menu-toggle{min-width:44px;min-height:44px;display:none;align-items:center;justify-content:center;cursor:pointer}
+@media(max-width:680px){
+  .menu-toggle{display:flex}
+  .nav.open{max-height:calc(100dvh - 68px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:24px}
+  .nav a{display:flex;align-items:center;min-height:44px;padding:8px 4px}
+  .nav a:focus-visible{outline-offset:2px}
+  .contact-card .btn,.estimate-box .btn,.download-actions .btn{min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+  .gallery-card img{display:block;width:100%;height:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .contact-card,.gallery-card,.price-grid article{transition:none}
+  .contact-card:hover{transform:none}
+}
