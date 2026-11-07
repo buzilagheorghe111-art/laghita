@@ -1,3 +1,12 @@
 
 /* Upgrade servicii si estimare */
 .services{background:#f4f8fc}.price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1150px;margin:38px auto 0}.price-grid article{background:#fff;border:1px solid #dce6f0;border-radius:14px;padding:22px;box-shadow:0 8px 24px #0b2a4b0a}.price-grid h3{font:700 15px Manrope,sans-serif;color:var(--navy);margin:0 0 12px}.price-grid b{font:800 20px Manrope,sans-serif;color:var(--blue)}.price-note{text-align:center;color:var(--muted);font-size:12px;margin:22px auto 0;max-width:850px}.estimate-box{max-width:650px;margin:35px auto 0;padding:30px;background:#fff;border:1px solid #dce6f0;border-radius:18px;box-shadow:0 12px 32px #0b2a4b12}.estimate-box label{display:block;font-weight:700;color:var(--navy);margin-bottom:9px}.estimate-box select{width:100%;padding:13px;border:1px solid #cbd7e4;border-radius:9px;background:#fff;color:var(--ink);font:inherit}#estimate-result{padding:15px;background:#eff6fc;border-radius:9px;color:var(--navy);font-weight:700;line-height:1.5}@media(max-width:850px){.price-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:580px){.price-grid{grid-template-columns:1fr}.estimate-box{padding:22px 18px}}
+
+/* Claritate vizuala pentru tarife si estimare */
+.price-grid article{display:flex;flex-direction:column;align-items:flex-start;gap:8px;transition:transform .18s ease,box-shadow .18s ease}
+.price-grid article:hover{transform:translateY(-3px);box-shadow:0 14px 30px #0b2a4b14}
+.price-grid article h3{margin:0}
+.price-grid article span{color:var(--muted);font-size:13px;line-height:1.5}
+.price-grid article b{margin-top:2px}
+.estimate-box .price-note{margin:16px auto 0;line-height:1.6}
+@media(prefers-reduced-motion:reduce){.price-grid article{transition:none}.price-grid article:hover{transform:none}}
