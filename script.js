@@ -1,4 +1,3 @@
-
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 
@@ -17,50 +16,55 @@ if (toggle && nav) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  emailjs.init({
-   publicKey: 'vZstjHBI7uKaHHRNL'
-  });
-
   const form = document.getElementById('booking-form');
-
   if (!form) return;
+
+  const button = form.querySelector('button[type="submit"]');
+  const status = document.getElementById('booking-status');
 
   form.addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    const button = form.querySelector('button[type="submit"]');
+    if (!form.reportValidity()) return;
+
     button.disabled = true;
+    const originalButtonText = button.textContent;
     button.textContent = 'Se trimite...';
-
-    const data = new FormData(form);
-
-   const templateParams = {
-  name: data.get('nume'),
-  nume: data.get('nume'),
-  telefon: data.get('telefon'),
-  email: data.get('email'),
-  masina: data.get('masina'),
-  numar: data.get('numar') || 'Nespecificat',
-  serviciu: data.get('serviciu'),
-  data: data.get('data'),
-  descriere: data.get('descriere') || 'Nespecificata'
-};
+    if (status) {
+      status.textContent = 'Solicitarea se trimite. Te rugăm să aștepți.';
+      status.dataset.state = 'loading';
+    }
 
     try {
-      await emailjs.send(
-        'service_jl8199c',
-        'template_7inrcsp',
-        templateParams
-      );
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
 
-      alert('Solicitarea a fost trimisă cu succes! Vă vom contacta în curând.');
+      const responseText = await response.text();
+      if (!response.ok) {
+        throw new Error(responseText || ('Eroare HTTP ' + response.status));
+      }
+
       form.reset();
+      if (status) {
+        status.textContent = 'Solicitarea a fost trimisă cu succes! Te vom contacta în curând.';
+        status.dataset.state = 'success';
+      } else {
+        alert('Solicitarea a fost trimisă cu succes! Te vom contacta în curând.');
+      }
     } catch (error) {
-      console.error('Eroare EmailJS:', error);
-      alert('Trimiterea a eșuat. Vă rugăm să încercați din nou sau să ne contactați telefonic.');
+      console.error('Eroare la trimiterea programării:', error);
+      if (status) {
+        status.textContent = 'Nu am putut trimite solicitarea. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.';
+        status.dataset.state = 'error';
+      } else {
+        alert('Trimiterea a eșuat. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.');
+      }
     } finally {
       button.disabled = false;
-      button.textContent = 'Trimite solicitarea pe e-mail';
+      button.textContent = originalButtonText;
     }
   });
 });
