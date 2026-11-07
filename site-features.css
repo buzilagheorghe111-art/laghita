@@ -1,0 +1,23 @@
+/* Module noi: tracking, recenzii si mementouri */
+.tracking-section,.reminders-section{background:#f4f8fc}
+.site-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;max-width:850px;margin:32px auto 0;padding:28px;background:#fff;border:1px solid #dce6f0;border-radius:16px;box-shadow:0 10px 28px #0b2a4b0d}
+.site-form h3{grid-column:1/-1;margin:0;color:var(--navy);font:800 21px Manrope,sans-serif}
+.site-form label{display:flex;flex-direction:column;gap:7px;color:var(--navy);font-weight:700;font-size:14px}
+.site-form input:not([type=checkbox]),.site-form select,.site-form textarea{width:100%;min-width:0;padding:12px 13px;border:1px solid #cbd7e4;border-radius:8px;background:#fff;color:#172b42;font:inherit}
+.site-form textarea{resize:vertical}
+.site-form button{justify-self:start}
+.form-result{grid-column:1/-1;margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.form-result[data-state=success]{color:#137547}
+.form-result[data-state=error]{color:#b42332}
+.compact-form{max-width:620px;grid-template-columns:1fr auto;align-items:end}
+.compact-form button{height:44px}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1100px;margin:34px auto 0}
+.review-card{padding:22px;background:#fff;border:1px solid #dce6f0;border-radius:14px;box-shadow:0 8px 22px #0b2a4b0a}
+.review-card h3{margin:8px 0;color:var(--navy);font:800 16px Manrope,sans-serif}
+.review-card p{margin:0;color:var(--muted);line-height:1.7;font-size:14px;white-space:pre-wrap}
+.review-stars{color:#e5a000;letter-spacing:2px;font-size:18px}
+.consent-label{grid-column:1/-1;flex-direction:row!important;align-items:flex-start;line-height:1.5}
+.consent-label input{margin-top:3px}
+.muted{color:var(--muted);text-align:center;grid-column:1/-1}
+@media(max-width:750px){.reviews-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.site-form,.compact-form{grid-template-columns:1fr;padding:22px 18px}.site-form button,.compact-form button{width:100%}.reviews-grid{grid-template-columns:1fr}}
