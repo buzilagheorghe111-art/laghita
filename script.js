@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
   name: data.get('nume'),
   nume: data.get('nume'),
   telefon: data.get('telefon'),
+  email: data.get('email'),
   masina: data.get('masina'),
   numar: data.get('numar') || 'Nespecificat',
   serviciu: data.get('serviciu'),
