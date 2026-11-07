@@ -10,3 +10,8 @@
 .price-grid article b{margin-top:2px}
 .estimate-box .price-note{margin:16px auto 0;line-height:1.6}
 @media(prefers-reduced-motion:reduce){.price-grid article{transition:none}.price-grid article:hover{transform:none}}
+
+/* Link telefonic evident in datele de contact */
+.contact-detail-link{color:var(--blue);font-weight:800;font-size:20px;text-decoration:none;letter-spacing:.2px}
+.contact-detail-link:hover{text-decoration:underline}
+.contact-detail-link:focus-visible{outline:3px solid #1681dc;outline-offset:4px;border-radius:4px}
