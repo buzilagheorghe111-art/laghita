@@ -6,6 +6,15 @@ alter table public.bookings
   add column if not exists preferred_time time,
   add column if not exists tracking_code text unique;
 
+-- Cod unic automat pentru fiecare programare noua; completeaza si programarile existente.
+alter table public.bookings
+  alter column tracking_code set default (
+    'LGH-' || upper(substr(replace(gen_random_uuid()::text, '-', ''), 1, 8))
+  );
+update public.bookings
+set tracking_code = 'LGH-' || upper(substr(replace(gen_random_uuid()::text, '-', ''), 1, 8))
+where tracking_code is null;
+
 create table if not exists public.reviews (
   id uuid primary key default gen_random_uuid(),
   customer_name text not null check (char_length(customer_name) between 2 and 80),
