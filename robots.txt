@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buzilagheorghe111-art.github.io/laghita/sitemap.xml
