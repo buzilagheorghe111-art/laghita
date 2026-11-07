@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         alert('E-mailul nu a putut fi trimis. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.');
       }
-    }
     } finally {
       button.disabled = false;
       button.textContent = originalButtonText;
