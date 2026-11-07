@@ -35,7 +35,7 @@
       car: String(data.get('masina') || '').trim(),
       registration_number: String(data.get('numar') || '').trim() || null,
       service: String(data.get('serviciu') || '').trim(),
-      preferred_date: String(data.get('data') || ''),
+      preferred_date: String(data.get('data') || ''),\n      preferred_time: String(data.get('ora') || '') || null,
       description: String(data.get('descriere') || '').trim() || null,
       status: 'new'
     };
