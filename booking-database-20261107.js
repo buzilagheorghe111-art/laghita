@@ -7,9 +7,46 @@
   if (!form) return;
   let isSubmitting = false;
 
+  // Restricții locale pentru data și intervalul orar al service-ului.
+  const dateInput = form.querySelector('[name="data"]');
+  const timeInput = form.querySelector('[name="ora"]');
+  const localDate = () => {
+    const now = new Date();
+    return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+  };
+  if (dateInput) dateInput.min = localDate();
+  const validateOpeningHours = () => {
+    if (!dateInput || !timeInput || !dateInput.value || !timeInput.value) return true;
+    const day = new Date(dateInput.value + 'T12:00:00').getDay();
+    const time = timeInput.value;
+    timeInput.setCustomValidity('');
+    if (day === 0) {
+      dateInput.setCustomValidity('Duminica service-ul este închis. Alege o altă zi.');
+      dateInput.reportValidity();
+      dateInput.setCustomValidity('');
+      return false;
+    }
+    if (day === 6 && (time < '09:00' || time > '13:00')) {
+      timeInput.setCustomValidity('Sâmbăta programul este 09:00–13:00.');
+      timeInput.reportValidity();
+      timeInput.setCustomValidity('');
+      return false;
+    }
+    if (day >= 1 && day <= 5 && (time < '09:00' || time > '17:00')) {
+      timeInput.setCustomValidity('De luni până vineri programul este 09:00–17:00.');
+      timeInput.reportValidity();
+      timeInput.setCustomValidity('');
+      return false;
+    }
+    return true;
+  };
+  if (dateInput) dateInput.addEventListener('change', validateOpeningHours);
+  if (timeInput) timeInput.addEventListener('change', validateOpeningHours);
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (isSubmitting) return;
+    if (!validateOpeningHours()) return;
     isSubmitting = true;
     const button = form.querySelector('button[type="submit"]');
     const status = document.getElementById('booking-status');
