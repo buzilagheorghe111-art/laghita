@@ -17,6 +17,17 @@
     if (status) { status.textContent = 'Se înregistrează solicitarea...'; status.dataset.state = 'pending'; }
 
     const data = new FormData(form);
+    const randomPart = Array.from(crypto.getRandomValues(new Uint8Array(4)), b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    const trackingCode = 'LGH-' + randomPart;
+    let codeField = form.querySelector('input[name="cod_urmarire"]');
+    if (!codeField) {
+      codeField = document.createElement('input');
+      codeField.type = 'hidden';
+      codeField.name = 'cod_urmarire';
+      form.appendChild(codeField);
+    }
+    codeField.value = trackingCode;
+
     const booking = {
       name: String(data.get('nume') || '').trim(),
       phone: String(data.get('telefon') || '').trim(),
@@ -27,6 +38,7 @@
       preferred_date: String(data.get('data') || ''),
       preferred_time: String(data.get('ora') || '') || null,
       description: String(data.get('descriere') || '').trim() || null,
+      tracking_code: trackingCode,
       status: 'new'
     };
 
@@ -37,7 +49,7 @@
           'apikey': SUPABASE_PUBLISHABLE_KEY,
           'Authorization': 'Bearer ' + SUPABASE_PUBLISHABLE_KEY,
           'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
+          'Prefer': 'return=minimal'
         },
         body: JSON.stringify(payload)
       });
@@ -55,26 +67,11 @@
         }
       }
 
-      const savedRows = await response.json();
-      const trackingCode = savedRows && savedRows[0] && savedRows[0].tracking_code;
-      if (trackingCode) {
-        let codeField = form.querySelector('input[name="cod_urmarire"]');
-        if (!codeField) {
-          codeField = document.createElement('input');
-          codeField.type = 'hidden';
-          codeField.name = 'cod_urmarire';
-          form.appendChild(codeField);
-        }
-        codeField.value = trackingCode;
-        if (status) {
-          status.textContent = 'Programarea a fost înregistrată. Cod de urmărire: ' + trackingCode + '. Se trimite e-mailul...';
-          status.dataset.state = 'success';
-        }
-      } else if (status) {
-        status.textContent = 'Programarea a fost înregistrată. Se trimite e-mailul...';
+      if (status) {
+        status.textContent = 'Programarea a fost înregistrată. Cod de urmărire: ' + trackingCode + '. Se trimite e-mailul...';
         status.dataset.state = 'success';
       }
-      console.info('Programarea a fost salvată în Supabase.');
+      console.info('Programarea a fost salvată în Supabase. Cod:', trackingCode);
     } catch (error) {
       console.error('Salvarea programării în Supabase a eșuat; e-mailul va fi trimis în continuare:', error);
       if (status) { status.textContent = 'Se trimite solicitarea prin e-mail...'; status.dataset.state = 'pending'; }
