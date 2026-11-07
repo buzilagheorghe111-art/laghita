@@ -63,10 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const emailResponse = await fetch(form.action, {
         method: 'POST',
         body: formData,
-        headers: {
-          'Accept': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        }
+        headers: { 'Accept': 'application/json' }
       });
       const emailText = await emailResponse.text();
       let emailResult = null;
@@ -76,9 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
         emailResult = null;
       }
 
-      if (!emailResponse.ok || (emailResult && emailResult.success === false)) {
-        console.error('Static Forms error:', emailResponse.status, emailResult || emailText);
-        throw new Error('Static Forms submission failed: ' + emailResponse.status);
+      if (!emailResponse.ok || !emailResult || emailResult.success !== true) {
+        const details = (emailResult && (emailResult.error || emailResult.message)) || emailText || ('HTTP ' + emailResponse.status);
+        console.error('Static Forms error:', emailResponse.status, details);
+        throw new Error('Static Forms: ' + details + ' (HTTP ' + emailResponse.status + ')');
       }
       emailSent = true;
 
@@ -125,10 +123,10 @@ document.addEventListener('DOMContentLoaded', function () {
           alert('E-mailul a fost trimis, dar salvarea programării a eșuat. Te rugăm să ne suni la 0741 826 476. Nu retrimite formularul.');
         }
       } else if (status) {
-        status.textContent = 'E-mailul nu a putut fi trimis. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.';
+        status.textContent = 'Static Forms a refuzat solicitarea: ' + String(error.message || error) + '. Te rugăm să ne contactezi la 0741 826 476.';
         status.dataset.state = 'error';
       } else {
-        alert('E-mailul nu a putut fi trimis. Te rugăm să încerci din nou sau să ne suni la 0741 826 476.');
+        alert('Static Forms a refuzat solicitarea: ' + String(error.message || error) + '. Te rugăm să ne suni la 0741 826 476.');
       }
     } finally {
       button.disabled = false;
