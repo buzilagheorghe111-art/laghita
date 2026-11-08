@@ -128,3 +128,25 @@ input::placeholder,textarea::placeholder{color:#9298a4}
  .whatsapp-header span{font-size:16px}
  .menu-toggle{flex:0 0 44px}
 }
+
+
+/* Formular programare: text alb in toate campurile */
+#booking-form.contact-card label,
+#booking-form.contact-card .consent-label,
+#booking-form.contact-card input:not([type="checkbox"]),
+#booking-form.contact-card select,
+#booking-form.contact-card textarea,
+#booking-form.contact-card select option {
+  color: #ffffff !important;
+}
+#booking-form.contact-card input::placeholder,
+#booking-form.contact-card textarea::placeholder {
+  color: #c5c8d0 !important;
+  opacity: 1;
+}
+#booking-form.contact-card input:-webkit-autofill,
+#booking-form.contact-card input:-webkit-autofill:hover,
+#booking-form.contact-card input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+}
