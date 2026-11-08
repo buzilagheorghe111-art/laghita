@@ -340,3 +340,55 @@ a, button { -webkit-tap-highlight-color: transparent; }
   #galerie .gallery-card figcaption b{font-size:11px}
   #galerie .gallery-card figcaption span{font-size:9px}
 }
+
+
+/* Identitate vizuala La Ghita: inspiratie din cele doua materiale grafice */
+:root{--navy:#202127;--blue:#d9002b;--red:#e0002b;--ink:#24252b;--pale:#f2f2f4}
+.site-header{background:#202127;box-shadow:0 5px 24px #0003}
+.site-header .brand{color:#fff}
+.nav{color:#f0f0f2}
+.nav a:hover{color:#ff344f}
+.menu-toggle{background:#33353d;color:#fff}
+.hero{
+  position:relative;isolation:isolate;min-height:650px;
+  padding:78px max(7vw,28px);
+  grid-template-columns:1fr 1fr;gap:48px;
+  background:
+    radial-gradient(circle at 88% 82%,#ffffff12 0 3px,transparent 4px) 0 0/25px 25px,
+    linear-gradient(115deg,#202127 0%,#292b32 62%,#17181d 100%);
+}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;left:-4%;width:110%;height:34px;background:#e0002b;transform:rotate(-7deg);pointer-events:none}
+.hero:before{top:10%;opacity:.9}
+.hero:after{bottom:13%;height:58px;transform:rotate(-7deg);opacity:.96}
+.hero .eyebrow{color:#ff657b}
+.hero h1{color:#fff;font-size:clamp(44px,6vw,76px);letter-spacing:-2px}
+.hero h1 em{color:#ff183e}
+.hero p{color:#e1e1e5}
+.hero-meta{color:#d2d2d7}
+.hero-art{height:auto;min-height:390px;display:block;overflow:visible}
+.hero-photo-frame{position:relative;z-index:1;padding:10px;background:#e0002b;box-shadow:18px 18px 0 #ffffff12,0 25px 70px #0008;transform:rotate(1.5deg)}
+.hero-photo-frame:after{content:"";position:absolute;inset:0;border:1px solid #ffffff55;pointer-events:none}
+.hero-photo-frame img{display:block;width:100%;height:440px;object-fit:cover;object-position:center;border:5px solid #202127}
+.hero .floating-tag{background:#fff;color:#202127;border-left:5px solid #e0002b}
+.hero .tag-one{top:24px;left:-18px}
+.hero .tag-two{right:-12px;bottom:22px}
+.trust-strip{background:#292b32;color:#fff}
+.trust-strip b{color:#ff2348}
+.section-heading h2,.feature h3,.price-grid h3,.contact-card h3,.contact-hours h3{color:#24252b}
+.features,.services,.tracking-section,.reminders-section,.faq-section,.contact{background:#f1f1f3}
+.feature,.price-grid article,.estimate-box,.site-form,.contact-card,.contact-hours,.faq-list details{border-color:#dedee2;box-shadow:0 10px 28px #17181d0c}
+.feature>span{background:#ffe7eb;color:#d9002b}
+.price-grid b,.contact-detail-link{color:#d9002b}
+.btn-primary{background:#e0002b;box-shadow:0 10px 25px #e0002b35}
+.btn-ghost{border-color:#ffffff88}
+footer{background:#202127;color:#d8d8dd}
+.footer-brand{color:#fff}
+@media(max-width:680px){
+ .hero{grid-template-columns:1fr;padding:58px 22px 46px;gap:34px}
+ .hero-art{min-height:280px}
+ .hero-photo-frame img{height:300px}
+ .hero:before{top:38%}
+ .hero:after{bottom:18%}
+ .hero .tag-one{left:-6px;top:-12px}
+ .hero .tag-two{right:-5px;bottom:-12px}
+}
