@@ -41,9 +41,20 @@
   const list=$('booking-list'),shown=rows.filter(r=>filter==='all'||r.status===filter);
   if(!shown.length){list.innerHTML='<p class="empty">Nu există programări în această categorie.</p>';return;}
   list.innerHTML=shown.map(r=>{const date=r.preferred_date?new Date(r.preferred_date+'T12:00:00').toLocaleDateString('ro-RO'):'Data nespecificată';const status=labels[r.status]||r.status||'Necunoscută';return '<article class="booking"><div><h3>'+esc(r.car||r.masina||'Autovehicul nespecificat')+' · '+esc(r.name||r.nume||'Client')+'</h3><div class="muted">📅 '+esc(date)+' '+esc(r.preferred_time||r.ora||'')+' · 🔧 '+esc(r.service||r.serviciu||'')+'</div><div class="muted">☎ '+esc(r.phone||r.telefon||'')+' · '+esc(r.email||'')+'</div><div class="muted">Nr. auto: '+esc(r.registration_number||r.numar||'—')+' · Cod: '+esc(r.tracking_code||'—')+'</div><p class="muted">'+esc(r.description||r.descriere||'Fără descriere')+'</p><span class="status">'+esc(status)+'</span></div><div class="actions">'+actionButtons(r)+'</div></article>';}).join('');
-  list.querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click',()=>change(b.dataset.id,b.dataset.status,b)));
+  list.querySelectorAll('button[data-id][data-status]').forEach(b=>b.addEventListener('click',()=>change(b.dataset.id,b.dataset.status,b)));
+  list.querySelectorAll('button[data-delete-id]').forEach(b=>b.addEventListener('click',()=>deleteCompleted(b.dataset.deleteId,b)));
  }
- function actionButtons(r){const opts=[['confirmed','Confirmă','green'],['in_progress','În lucru','amber'],['waiting_parts','Așteaptă piese','amber'],['completed','Finalizată','green'],['cancelled','Anulează','gray']];return opts.filter(o=>o[0]!==r.status).map(o=>'<button class="btn '+o[2]+'" data-id="'+esc(r.id)+'" data-status="'+o[0]+'">'+o[1]+'</button>').join('');}
+ function actionButtons(r){const opts=[['confirmed','Confirmă','green'],['in_progress','În lucru','amber'],['waiting_parts','Așteaptă piese','amber'],['completed','Finalizată','green'],['cancelled','Anulează','gray']];const statusActions=opts.filter(o=>o[0]!==r.status).map(o=>'<button class="btn '+o[2]+'" data-id="'+esc(r.id)+'" data-status="'+o[0]+'">'+o[1]+'</button>').join('');const deleteAction=r.status==='completed'?'<button class="btn danger" data-delete-id="'+esc(r.id)+'">Șterge programarea</button>':'';return statusActions+deleteAction;}
+ async function deleteCompleted(id,btn){
+  const booking=rows.find(r=>String(r.id)===String(id));
+  if(!booking||booking.status!=='completed'){note('dashboard-message','Poți șterge doar programări finalizate.','error');return;}
+  if(!confirm('Ștergi definitiv această programare finalizată? Datele și istoricul ei, inclusiv codul de urmărire, nu vor mai fi disponibile. Acțiunea nu poate fi anulată.'))return;
+  btn.disabled=true;
+  const {error}=await sb.from('bookings').delete().eq('id',id).eq('status','completed');
+  if(error){note('dashboard-message','Nu am putut șterge programarea: '+error.message,'error');btn.disabled=false;return;}
+  note('dashboard-message','Programarea finalizată a fost ștearsă.','success');
+  await load();
+ }
  async function change(id,status,btn){if(!confirm('Schimbi starea programării în „'+labels[status]+'”?'))return;btn.disabled=true;const {error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',id);if(error){note('dashboard-message','Eroare la salvare: '+error.message,'error');btn.disabled=false;return;}note('dashboard-message','Starea a fost actualizată. Se trimite notificarea către client...','success');
   const {data:mailData,error:mailError}=await sb.functions.invoke('send-status-email',{body:{booking_id:id,status}});
   if(mailError||!mailData?.success){
