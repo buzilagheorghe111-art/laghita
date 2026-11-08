@@ -44,6 +44,14 @@
   list.querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click',()=>change(b.dataset.id,b.dataset.status,b)));
  }
  function actionButtons(r){const opts=[['confirmed','Confirmă','green'],['in_progress','În lucru','amber'],['waiting_parts','Așteaptă piese','amber'],['completed','Finalizată','green'],['cancelled','Anulează','gray']];return opts.filter(o=>o[0]!==r.status).map(o=>'<button class="btn '+o[2]+'" data-id="'+esc(r.id)+'" data-status="'+o[0]+'">'+o[1]+'</button>').join('');}
- async function change(id,status,btn){if(!confirm('Schimbi starea programării în „'+labels[status]+'”?'))return;btn.disabled=true;const {error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',id);if(error){note('dashboard-message','Eroare la salvare: '+error.message,'error');btn.disabled=false;return;}note('dashboard-message','Starea a fost actualizată.','success');await load();}
+ async function change(id,status,btn){if(!confirm('Schimbi starea programării în „'+labels[status]+'”?'))return;btn.disabled=true;const {error}=await sb.from('bookings').update({status,updated_at:new Date().toISOString()}).eq('id',id);if(error){note('dashboard-message','Eroare la salvare: '+error.message,'error');btn.disabled=false;return;}note('dashboard-message','Starea a fost actualizată. Se trimite notificarea către client...','success');
+  const {data:mailData,error:mailError}=await sb.functions.invoke('send-status-email',{body:{booking_id:id,status}});
+  if(mailError||!mailData?.success){
+   const detail=mailData?.error||mailError?.message||'Eroare necunoscută';
+   note('dashboard-message','Starea a fost salvată, dar e-mailul NU a putut fi trimis: '+detail,'error');
+  }else{
+   note('dashboard-message','Starea a fost actualizată și e-mailul a fost trimis clientului.','success');
+  }
+  await load();}
  session();
 })();
