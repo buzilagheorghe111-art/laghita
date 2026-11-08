@@ -71,3 +71,21 @@ revoke all on function public.lookup_repair_status(text) from public;
 grant execute on function public.lookup_repair_status(text) to anon, authenticated;
 
 -- Ora programata, daca formularul trimite un camp separat in viitor.
+
+
+-- Panou privat Service Auto La Ghita.
+-- Acces exclusiv pentru contul administratorului autentificat.
+alter table public.bookings enable row level security;
+
+drop policy if exists "La Ghita admin can read bookings" on public.bookings;
+create policy "La Ghita admin can read bookings"
+  on public.bookings for select to authenticated
+  using ((auth.jwt() ->> 'email') = 'buzilagheorghe111@gmail.com');
+
+drop policy if exists "La Ghita admin can update bookings" on public.bookings;
+create policy "La Ghita admin can update bookings"
+  on public.bookings for update to authenticated
+  using ((auth.jwt() ->> 'email') = 'buzilagheorghe111@gmail.com')
+  with check ((auth.jwt() ->> 'email') = 'buzilagheorghe111@gmail.com');
+
+grant select, update on public.bookings to authenticated;
