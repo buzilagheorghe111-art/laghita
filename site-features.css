@@ -109,3 +109,22 @@ input::placeholder,textarea::placeholder{color:#9298a4}
 @media(prefers-reduced-motion:reduce){
  .feature,.price-grid article,.contact-card,.review-card{transition:none}
 }
+
+
+/* Buton WhatsApp mutat în antet, lângă logo */
+.site-header{gap:18px}
+.whatsapp-header{
+ display:inline-flex;align-items:center;justify-content:center;gap:9px;
+ flex:0 0 auto;padding:11px 17px;border-radius:999px;
+ background:#25D366;color:#102319!important;font-size:13px;font-weight:800;
+ box-shadow:0 5px 16px #25d36630;transition:transform .18s ease,box-shadow .18s ease;
+}
+.whatsapp-header:hover{transform:translateY(-2px);box-shadow:0 8px 22px #25d36650}
+.whatsapp-header span{font-size:18px;line-height:1}
+@media(min-width:681px){.site-header .nav{margin-left:auto}}
+@media(max-width:680px){
+ .site-header{gap:10px}
+ .whatsapp-header{margin-left:auto;padding:9px 12px;font-size:12px;gap:6px}
+ .whatsapp-header span{font-size:16px}
+ .menu-toggle{flex:0 0 44px}
+}
