@@ -21,3 +21,91 @@
 .muted{color:var(--muted);text-align:center;grid-column:1/-1}
 @media(max-width:750px){.reviews-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.site-form,.compact-form{grid-template-columns:1fr;padding:22px 18px}.site-form button,.compact-form button{width:100%}.reviews-grid{grid-template-columns:1fr}}
+
+
+/* TEMA DARK COMPLETA – SERVICE AUTO LA GHITA */
+:root{
+  --navy:#f4f5f7;
+  --blue:#ff3150;
+  --red:#e6002e;
+  --ink:#eceef2;
+  --muted:#b5bac5;
+  --pale:#292b32;
+  --white:#202127;
+}
+html,body{background:#17181d!important;color:#eceef2}
+body{color:#eceef2}
+.site-header{background:#1d1f25!important;border-bottom:1px solid #393b43;box-shadow:0 8px 28px #0006}
+.site-header .brand,.brand{color:#fff}
+.nav{color:#e7e8ec}
+.nav a:hover,.text-link:hover{color:#ff3655}
+.menu-toggle{background:#30323a;color:#fff}
+.hero{background:
+ radial-gradient(circle at 88% 82%,#ffffff12 0 3px,transparent 4px) 0 0/25px 25px,
+ linear-gradient(115deg,#202127 0%,#292b32 62%,#17181d 100%)!important;color:#fff}
+.hero h1,.hero .section-heading h2{color:#fff}
+.hero p{color:#d6d8de}
+.hero .eyebrow{color:#ff647b}
+.hero h1 em,.section-heading h2 em{color:#ff3150}
+.hero-meta{color:#c6c9d1}
+.floating-tag{background:#30323a!important;color:#fff!important;border:1px solid #555965;border-left:4px solid #e6002e}
+.trust-strip{background:#25272e!important;color:#f3f4f6;border-top:1px solid #383a42;border-bottom:1px solid #383a42}
+.trust-strip b{color:#ff3150}
+.section,.intro,.services,.features,.tracking-section,.reminders-section,.faq-section,.contact,.local-seo,.gallery{background:#1b1d23!important;color:#eceef2}
+.section-heading h2,.manual h2,.download-band h2{color:#fff!important}
+.section-heading p,.intro>p,.manual p{color:#b9bec8}
+.eyebrow{color:#ff647b}
+.feature,.price-grid article,.estimate-box,.site-form,.contact-card,.contact-hours,.faq-list details,.review-card{
+ background:#272930!important;color:#eceef2!important;border:1px solid #41444e!important;
+ box-shadow:0 12px 28px #0004!important;
+}
+.feature:hover,.price-grid article:hover,.contact-card:hover,.review-card:hover{border-color:#e6002e!important;box-shadow:0 15px 34px #0006,0 0 0 1px #e6002e33!important}
+.feature>span{background:#49232c!important;color:#ff4965!important}
+.feature h3,.price-grid h3,.contact-card h3,.contact-hours h3,.site-form h3,.site-form label,.estimate-box label{color:#fff!important}
+.feature p,.price-grid article span,.price-note,.contact-card p,.contact-hours p,.faq-list details p,.review-card p,.form-result,.muted{color:#b9bec8!important}
+.price-grid b,.contact-detail-link{color:#ff4965!important}
+.estimate-box select,.site-form input:not([type=checkbox]),.site-form select,.site-form textarea,
+#booking-form.contact-card input,#booking-form.contact-card select,#booking-form.contact-card textarea{
+ background:#191b21!important;color:#f5f6f8!important;border:1px solid #555965!important;
+}
+.estimate-box select:focus,.site-form input:focus,.site-form select:focus,.site-form textarea:focus,
+#booking-form.contact-card input:focus,#booking-form.contact-card select:focus,#booking-form.contact-card textarea:focus{
+ outline:2px solid #e6002e;outline-offset:1px;border-color:#ff3150!important;
+}
+#estimate-result{background:#35232a!important;color:#fff!important;border-left:4px solid #e6002e}
+.local-seo-content{background:#272930!important;border:1px solid #41444e!important}
+.local-seo-content p{color:#c1c5ce!important}
+.faq-list details{background:#272930!important}
+.faq-list summary{color:#f5f5f7!important}
+.faq-list summary:after{color:#ff4965}
+.contact-hours{border-left:5px solid #e6002e!important}
+.contact-hours p{border-bottom-color:#41444e!important}
+.consent-label{color:#c6c9d1!important}
+.form-result[data-state=success]{color:#62d69b!important}
+.form-result[data-state=error]{color:#ff7888!important}
+.download-band{background:linear-gradient(115deg,#202127,#343640)!important;border-top:1px solid #454751;border-bottom:1px solid #454751}
+.download-band .eyebrow{color:#ff8294}
+.download-band p,.download-band small{color:#d2d4da}
+.btn-primary{background:#e6002e!important;color:#fff!important;box-shadow:0 10px 25px #e6002e40!important}
+.btn-primary:hover{background:#ff2448!important}
+.btn-ghost{border-color:#ffffff70!important;color:#fff!important}
+.btn-light{background:#f2f2f4!important;color:#202127!important}
+.text-link{color:#ff647b!important}
+.manual{border-bottom-color:#41444e!important}
+.manual-icon{background:#34232a!important;border-color:#70303e!important;color:#ff4965!important;box-shadow:8px 8px 0 #14151a!important}
+.gallery-card{background:#272930!important;border-color:#41444e!important}
+.gallery-card>a{background:#191b21!important}
+.gallery-card figcaption b{color:#fff!important}
+.gallery-card figcaption span{color:#b9bec8!important}
+footer{background:#17181d!important;color:#aeb3bd!important;border-top:1px solid #393b43}
+.footer-brand{color:#fff!important}
+.skip-link{background:#272930!important;color:#fff!important;border-color:#e6002e!important}
+input::placeholder,textarea::placeholder{color:#9298a4}
+@media(max-width:680px){
+ .nav{background:#202127!important;border-top:1px solid #41444e;box-shadow:0 14px 24px #0008}
+ .nav a{color:#f0f1f4}
+ .nav a:hover{background:#30323a}
+}
+@media(prefers-reduced-motion:reduce){
+ .feature,.price-grid article,.contact-card,.review-card{transition:none}
+}
